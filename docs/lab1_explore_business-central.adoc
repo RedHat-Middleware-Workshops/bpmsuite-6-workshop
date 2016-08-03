@@ -1,0 +1,21 @@
+= JBoss BPMSuite 6.x Workshop Labs
+
+== Lab 1: Exploring Business Central
+
+You have been provided with a pre-defined and pre-installed runtime for these labs. The environment contains the following runtimes, tools and utilities:
+
+* JDK 1.8.0: The Java Development Kit, version 8
+* JBoss EAP 6.4.7.GA: The JBoss Enterprise Application Platform runtime on which JBoss BPMSuite runs (note that BPMSuite supports other containers as well).
+
+
+=== Objectives
+ 
+* Explore the provided lab runtime.
+* Learn how to start and access the Business Central environment of JBoss BPMSuite.
+* Explore the various Authoring views: Adminisration, Artifact Repository and Project Authoring.
+
+
+
+
+
+

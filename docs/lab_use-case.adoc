@@ -1,0 +1,22 @@
+= JBoss BPMSuite 6.x Workshop Labs
+
+== Use Case
+
+In the following lab-series we will define, model and execute a business-process for a travel agency. This travel-agency has recently decided that they want to automate 
+their business process that deals with the booking of both flights and hotels, including the credit-card payment process. The business case for automating this process is to:
+
+* streamline process execution
+* make the process repeatable and predictable
+* automate business rule execution
+* provide a better user experience for the customers by providing faster feedback
+* allow for process analysis to identify potential bottlenecks
+* implement the first steps for process optimization.
+
+These labs are based on the Red Hat JBoss BPMSuite Travel Agency demo, which can be found https://github.com/jbossdemocentral/bpms-travel-agency-demo[here].
+
+The final business process is show below.
+
+image:images/org.specialtripsagency.specialtripsagencyprocess.png["Travel Agency process",height=128]
+
+To recreate the full process from scratch would be too much work for this one-day workshop. Therefore, because we still want to touch the most important aspects of BPMSuite and we 
+want to implement a full process, we will start with pre-defined parts of the process to which we will add the requirement elements to create the full implementation.
