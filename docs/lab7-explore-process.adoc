@@ -1,0 +1,122 @@
+= JBoss BPMSuite 6.x Workshop Labs
+
+== Lab 7: Exploring the Process
+
+In this lab we will explore the initial process that we will use in the remainder of this workshop.
+
+=== Objectives
+ 
+* Learn how to use the BPMN2 Process Editor
+* Learn the constructs of the initial process.
+
+== Introduction
+
+In this lab we will explore the initial process provided in the workshop. In further labs we will expend this process, with the goal to finally implement the full https://github.com/jbossdemocentral/bpms-travel-agency-demo[Travel Agency Demo] process show below:
+
+image:images/org.specialtripsagency.specialtripsagencyprocess.png["Travel Agency Demo process", 1024]
+
+== Process
+The Travel Agency process consists of a main process (_specialtripsagencyprocess_) and 2 (reusable) sub-processes (_calculatepriceprocess_ and _compensateService_). The use-case of the process is booking a holiday, which includes booking a flight and hotel, and doing a payment. The high-level tasks are:
+
+* Start the process by providing the input data (e.g. name, e-mail address, origin, destination, travel-dates, etc.)
+* Retrieve flight and hotel information
+* Validate the data
+* Calculate the price.
+* Review the price of required.
+* Provide payment details.
+* Book flight and hotel
+
+For this workshop we've remove some steps from the final process. The goal of the exercises is to add the required steps to (re-)create the full process.
+
+Open JBoss BPMSuite Business Central at http://localhost:8080/business-central (u: bpmsAdmin, p: bpmsuite1!) and open the _specialtripsagencyprocess_. The inital process looks like this
+
+image:images/lab7-initial-process.png["Initial Travel Agency Process"]
+
+== Proces Variables
+
+To work with data in a process, a process requires process variables. Process variables are stored in the process context (or _kcontext_) and are accessible anywhere in the process. By default, the variales are stores with the process instance in BLOB format in the BPMSuite database. To serialize/marshall the process variables, JBoss BPMSuite relies on Java Serialization. This means that all process variables need to be of a data type that implements the `Serializable` interface.
+
+As JBoss BPMSuite is a very flexible platform, it also allows to store process variables at a different location than the BLOB format of the process instance. This can be accomplished by implementing a custom _Marshalling Strategy_ for the process variables. This _Marshalling Strategy_ can then be configurd on the https://access.redhat.com/documentation/en-US/Red_Hat_JBoss_BPM_Suite/6.3/html/Administration_And_Configuration_Guide/sect-Deployment_Descriptors.html[Deployment Descriptor] of the deployment unit (KJAR).
+
+Process variables are defined on the process definition.
+
+[start=1]
+. Open the `specialtripsagencyprocess` in the process designer in JBoss BPMSuite.
+. Click on an empty space on the canvas. This selects the process properties.
+. Open the properties panel on the right-hand-side of the editor by clicking on the double arrow icon on the top right of the editor.
+
+image:images/lab7-process-properties-editor.png["Process Properties", 512]
+
+[start=4]
+. In the properties editor panel, click on the "Variable Definitions" field. To open the editor, click on the down facing arrow icon in the "Variable Definitions" field.
+
+image:images/lab7-process-variable-editor.png["Process Variable Editor", 512]
+
+[start=5]
+. The editor allows us to add, edit and delete process variables. In the editor we can see that we can define both process variables of primitive types, as well as process variables of complex types. The only requirement is that the complex either needs to implement the `Serializable` interface, or that a custom _Marshalling Strategy has been defined and configured for the complex type.
+
+== Process Nodes
+
+The _specialtripsagencyprocess_ uses most of the basic nodes available in JBoss BPMSuite. 
+
+=== Start Event
+
+The _Start Event_ defines the start of the process. JBoss BPMSuite supports multiple BPMN2 start event types:
+
+image:images/lab7-start-events.png["Start Events", 256]
+
+The _specialtripsagencyprocess_ uses a so called _none_ start event, which implies that the process is started by explicitly calling _start_ on the process. Other ways to start a process are via a message (_message start event_), singnal ("_signal start event_"), timer (_timer start event), etc.
+
+=== Script Task Node
+
+BPMN 2 defines multiple types of _Task Nodes_.
+
+image:images/lab7-task-nodes.png["Task Nodes", 256]
+
+The _Script Task Node_ is a task node that executes a script. JBoss BPMSuite supports multiple scipt languages, including Java, JavaScript and MVEL. Scripps can be used to, for example, log messages, prepare process data (e.g. composition of a WebSevice request), set process variables, etc.
+
+Note that it is common practice in BPMN2 business processes to have each node in the process represent a business action. Script task nodes usually do not represent business actions, states and/or events, but are usually have a more technical nature. Therefore, using script task nodes in process definitions sometimes is questionable from a  business process design perspective. JBoss BPMSuite however provides a second option to execute scripts. On each node in JBoss BPMSuite we can configure an _On Entry_ and _On Exit_ script action. These scripts are invisable in the process design, but can contain the same scripts as the script-task nodes. This allows to use scripts to, for example, initialize web-service request objects, without making the logic visible in the BPMN2 process design.
+
+The _specialtripsagencyprocess_ uses a number of script task nodes, for example the _Prepare Web Service Data_ node, the first node in the process. This node prepares the webservice requests for the Flight and Hotel webservices (note that we will implement the Fligh WebService call later in these labs).
+
+The script can be accessed by selecting the script task node in the process, and opening the properties window on the right-hand-side of the editor. The script is defined in the _Script_ property field. By clicking on the properties field, the script editor will open.
+
+image:images/lab7-script-editor.png["Script Editor", 1024]
+
+=== WebService Task Node
+
+The _WebService Task Node_ is one of the 4 pre-defined "Service Tasks" in the JBoss BPMSuite platform. The service tasks allow for custom service task node implementations (backed by a WorkItemHandler implementation). Custom WorkItemHandlers are out-of-scope for this workshop, but more information on `WorkItemHandlers` can be found https://access.redhat.com/documentation/en-US/Red_Hat_JBoss_BPM_Suite/6.3/html/User_Guide/sect-Domain-specific_Tasks.html[here]
+
+image:images/lab7-service-tasks.png["Service Tasks", 512]
+
+The _WebService Task Node_ has the following input and output variables. Input and output variable values are mapped from and to process variables (or static values).
+
+Input:
+
+* Url:  the URL of the WebService's WSDL.
+* Mode: SYNC or ASYNC.
+* Parameter: the webservice request.
+* Namespace: the namespace of the service in the WSDL.	
+* Interface: the name of the service in the WSDL.
+* Operation: the service's operation we want to call.
+* Endpoint (optianal): the webservice endpoint to call (this can be used when the endpoint defined in the WSDL is not the endpoint we want to call, for example when the webservice is hosted behind  load-balancer).
+
+Output:
+
+* Result: the result object of the webservice call. 
+
+The _Data I/O_ editor, in which the input and output data mappings can be defined can be opened by selecting the WebService Task Node in the process, opening the properties panel and selecting the _Assignments_ field. This will open the following editor, which allows to edit the data input and output mapping for the current node.
+
+image:images/lab7-webservice-data-input-output.png["WebService Data Input Output", 512]
+
+
+=== Rule node
+
+The _Rule Node_ is one of the Task nodes available in BPMN2 which allows one to execute business rules in BPMN2 node. The 
+
+
+
+
+
+
+

@@ -88,7 +88,7 @@ then
 end
 ----
 
-image:images/lab5-new-drl-complete.png["New DRL Complete", 512]
+image:images/lab5-new-drl-complete.png["New DRL Complete", 1024]
 
 [start=8]
 . Click on the _Save_ button in the upper right corner of the editor to save the rule.
