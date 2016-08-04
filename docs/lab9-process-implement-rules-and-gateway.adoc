@@ -1,41 +1,70 @@
 = JBoss BPMSuite 6.x Workshop Labs
 
-== Lab 8: Implement WebService call
+== Lab 9: Implement Rule node and Data-based Exclusive Gateway
 
-In this lab we will implement the WebService call from the JBoss BPMSuite process to the Flight WebService.
+In this lab we will implement a Rule node which will execute/enable the _rejection_ rules, and a Data-based Exclusive gateway and sequence flow conditions that provides conditional routing within the process.
 
 === Objectives
  
-* Learn how to use the JBoss BPMSuite WebServiceWorkItemHandler
-* Learn how to map process data to WorkItemHandlers
-* Learn how to call a WebService from a JBoss BPMSuite process
+* Learn how to use the JBoss BPMSuite Rule Node.
+* Learn how to enable rule execution based on _ruleflow-groups_.
+* Learn how to define conditions on sequence flows for conditional routing in processes.
 
 == Introduction
 
-In this lab we will explore the initial process provided in the workshop. In further labs we will expend this process, with the goal to finally implement the full https://github.com/jbossdemocentral/bpms-travel-agency-demo[Travel Agency Demo] process show below:
+In Lab 4 and 5 we implemented data validation rules in both the _Guided Rules_ format and in _DRL_ (technical rules) format. Both rules were configured to be in the _rejection_ ruleflow-group. The rules will validate the data and a `Rejection` fact (with a message) to the session, which can later be used in conditional routing. The task of this lab is therefore to add a _Rule Node_ which enables the _rejection_ ruleflow-group.
 
-image:images/org.specialtripsagency.specialtripsagencyprocess.png["Travel Agency Demo process", 1024]
+== Implementing the Rule Node
+
+[start=1]
+. We want to add the Rule Node after the _Prepare Data Script_, and before the Data-based Exclusive Gateway. First, we need to remove the connector between those 2 nodes.
+
+image:images/lab9-remove-connector.png["Remove Connector", 256]
+
+[start=2]
+. Add a _Business Rule_ node to the canvas and give it the name "Validate Data". The _Business Rule_ node can be found under the _Tasks_ category in the palette.
+
+image:images/lab9-add-rule-node.png["Add Rule Node", 256]
+
+[start=3]
+. Connect the new _Rule Node_ to the _Prepare Data Script_ node and the _Data-based Exclusive Gateway_.
+
+image:images/lab9-connect-rule-node.png["Connect Rule Node", 256]
+
+[start=4]
+. Configure the ruleflow-group on the rule node. To do this, select the rule node and open the properties editor on the right hand side of the editor. Click on the _Ruleflow Group_ field. This will open the Ruleflow-Group editor. Select the _rejection_ ruleflow-group and click on the _Save_ button.
+
+image:images/lab9-ruleflow-group-editor.png["Ruleflow Group Editor", 256]
+
+[start=5]
+. Now that we've configured the Rule Node, we need to configure the decision logic in the sequence flows that go out of the _Data-based Exclusive_ gateway. The rules will insert a `Rejection` object if the data is not valid. We can check on the presence of that fact in the conditions of our sequence flow going out of the gateway. We can use a Drools conditional expression for this. Select the sequence flow named _rejected_ and open the properties panel. Make sure the _Condition Expression Language_ is set to "Drools". Next, click on the _Expression_ field and enter the following Drools condition:
+
+[source, drl]
+----
+exists Rejection()
+----
+
+[start=6]
+. The "Not rejected" sequence flow should be taken when there is not a `Rejection` fact present in the session. Select the sequence flow and open the properties panel. Make sure the _Condition Expression Language_ is set to "Drools". Click on the _Expression_ field and enter the following Drools condition:
 
 
+[source, drl]
+----
+not Rejection()
+----
 
+[start=7]
+. We can again change the color of the node, in this case our new Rule Node, to match the coloring scheme of our business process. In this case we will use color code "#99CC00".
 
-== Process
-The Travel Agency process consists of a main process (_specialtripsagencyprocess_) and 2 (reusable) sub-processes (_calculatepriceprocess_ and _compensateService_). The use-case of the process is booking a holiday, which includes booking a flight and hotel, and doing a payment. The high-level tasks are:
+image:images/lab9-complete.png["Complete", 256]
 
-* Start the process by providing the input data (e.g. name, e-mail address, origin, destination, travel-dates, etc.)
-* Retrieve flight and hotel information
-* Validate the data
-* Calculate the price.
-* Review the price of required.
-* Provide payment details.
-* Book flight and hotel
+[start=8]
+. Validate the process and save it using the _Save_ button in the upper right corner of the editor.
 
-For this workshop we've remove some steps from the final process. The goal of the exercises is to add the required steps to (re-)create the full process.
+== Conclusion
 
-Open JBoss BPMSuite Business Central at http://localhost:8080/business-central (u: bpmsAdmin, p: bpmsuite1!) and open the _specialtripsagencyprocess_. The inital process looks like this
+In this lab we've added a Rule Node that will execute our business rules and conditions on our gateway sequence flows that route our process based on the outcome of our rules.
 
-image:images/lab7-initial-process.png["Initial Travel Agency Process"]
-
-
+In the next lab we will add a Subprocess Node which adds the calculation sub-process to our process definition.
 
 

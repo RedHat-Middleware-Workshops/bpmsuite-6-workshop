@@ -61,6 +61,8 @@ The _specialtripsagencyprocess_ uses most of the basic nodes available in JBoss 
 
 === Start Event
 
+image:images/lab7-start-event.png["Start Event", 64]
+
 The _Start Event_ defines the start of the process. JBoss BPMSuite supports multiple BPMN2 start event types:
 
 image:images/lab7-start-events.png["Start Events", 256]
@@ -68,6 +70,8 @@ image:images/lab7-start-events.png["Start Events", 256]
 The _specialtripsagencyprocess_ uses a so called _none_ start event, which implies that the process is started by explicitly calling _start_ on the process. Other ways to start a process are via a message (_message start event_), singnal ("_signal start event_"), timer (_timer start event), etc.
 
 === Script Task Node
+
+image:images/lab7-script-task-node.png["Script Task Node", 128]
 
 BPMN 2 defines multiple types of _Task Nodes_.
 
@@ -84,6 +88,8 @@ The script can be accessed by selecting the script task node in the process, and
 image:images/lab7-script-editor.png["Script Editor", 1024]
 
 === WebService Task Node
+
+image:images/lab7-webservice-node.png["WebService Node", 128]
 
 The _WebService Task Node_ is one of the 4 pre-defined "Service Tasks" in the JBoss BPMSuite platform. The service tasks allow for custom service task node implementations (backed by a WorkItemHandler implementation). Custom WorkItemHandlers are out-of-scope for this workshop, but more information on `WorkItemHandlers` can be found https://access.redhat.com/documentation/en-US/Red_Hat_JBoss_BPM_Suite/6.3/html/User_Guide/sect-Domain-specific_Tasks.html[here]
 
@@ -110,13 +116,57 @@ The _Data I/O_ editor, in which the input and output data mappings can be define
 image:images/lab7-webservice-data-input-output.png["WebService Data Input Output", 512]
 
 
-=== Rule node
+=== Rule Node
 
-The _Rule Node_ is one of the Task nodes available in BPMN2 which allows one to execute business rules in BPMN2 node. The 
+image:images/lab7-rule-node.png["Rule Node", 128]
+
+The _Rule Node_ is one of the Task nodes available in BPMN2 which allows one to execute business rules in BPMN2 node. In JBoss BPMSuite, the rule engine is provided by the embedded JBoss BRMS (Drools) runtime.
+ 
+The _Rule Node_ is configured with a so called `ruleflow-group`. The `ruleflow-group` can be configured by clicking a _Rule Node_, opening the properties panel and selecting the _Ruleflow Group_ field. This will open the _Ruleflow Group_ editor.
+
+=== Human Task Node
+
+image:images/lab7-human-task-node.png["Human Task Node", 128]
+
+The _Human Task Node_ is another Task node available in BPMN2 which defines that the process requires human interaction. When a _Human Task Node_ is entered, the business process hits a so called _wait-state_, and will wait untill completion of the Human Task. When the human-task is completed, the process will continue.
+
+As with the WebService Task Node, process variables can be mapped to and from a Human Task node, which allows human tasks to see and work with process data. The variable mapping is, as with the WebService Task Node, configured using the "Assignment" field in the property editor.
+
+Human tasks need to have a unique name (which also controls their mapping to a human-task form). Human tasks can be assigned to an actor (user) or a list of actors, or to groups (or a list of groups). Only people with the given username or group membership are allowed to work on the task.
+
+The JBoss BPMSuite Human Task engine is based on the WS-HumanTask standard. It provides features like delegation, escalation, re-assignment of tasks, etc. More information on the Human Task engine can be found [here]
+
+== Subprocesses
+
+image:images/lab7-subprocess-node.png["Subprocess Node", 128]
+
+Subprocess nodes allow to call a (reusable) subprocess from, or embed a subprocess in, the current process. The following subprocess nodes are supported in BPMSuite:
+
+image:images/lab7-sub-processes.png["Sub Processes", 256]
+
+Depending on the type of sub-process, different properties will be available. In our workshop we will be using the _Reusable_ subprocess, which points to on of our other processes in our project (i.e. _calculatepriceprocess_ or _compensateService_). Again, properties can be edited by selecting the node and opening the properties panel. For a reusable subprocess, we need to set the "Called Element" to the _id_ of the process we want to call. Second, the _Assignments_ property allows us to define the input and output variable mapping from our main process to the subprocess.
+
+=== Gateways
+
+image:images/lab7-gateway.png["Gateway", 128]
+
+BPMN2 supports a number of different diverging and converging gateways:
+
+image:images/lab7-gateways.png["Gateways", 256]
+
+In this workshop we will be using 2 of the gateways, the _Data-based Exclusive_ (XOR) and the _Parallel_.
+
+Gateways allow us to split a path into 2 or more (parallel) paths to accompany for parts of the process that can be executed in parallel (using for example the _parallel_ gateway) or to take different paths within the process based on data and/or decision logic (using for example _Data-based Exclusive_ gateways). Within the workshop we use both approaches.
+
+The decision logic that determines which path to take in a diverging gateway is configured on the edges (sequence flows) leaving the gateway, not on the gateway node itself. The conditional logic can be configured by selecting an edge, opening the properties panel, and configuring the _Expression_ field. Note that the expression can be defined in:
+
+* Drools: the rule language. The condition is defined as a Drools left-hand-side (LHS) constraint.
+* Java: the condition is defined as a Java `return` statement which must return a boolean.
+* Javascript: the condition is defined as a Javascript expression which must return a boolean.
+* MVEL: the condition is defined as an MVEL expression which must return a boolean.
 
 
+== Conclusion
 
-
-
-
+In this lab we explored the pre-defined _specialtripsagencyprocess_ that will serve as the base for the remained of our workshop. We've discussed a number of the more widely used BPMN2 nodes and constructs and inspected their configuration. This has shows us the basic approach how to define BPMN2 business processes in JBoss BPMSuite and should be a solid base for the remained of this workshop.
 
