@@ -1,40 +1,89 @@
 = JBoss BPMSuite 6.x Workshop Labs
 
-== Lab 8: Implement WebService call
+== Lab 10: Implement SubProcess call
 
-In this lab we will implement the WebService call from the JBoss BPMSuite process to the Flight WebService.
+In this lab we will implementn call a (reusable) SubProcess from our main process.
 
 === Objectives
  
-* Learn how to use the JBoss BPMSuite WebServiceWorkItemHandler
-* Learn how to map process data to WorkItemHandlers
-* Learn how to call a WebService from a JBoss BPMSuite process
+* Learn how to use the JBoss BPMSuite Subprocesses
+* Learn how to map process data to subprocesses
 
 == Introduction
 
-In this lab we will explore the initial process provided in the workshop. In further labs we will expend this process, with the goal to finally implement the full https://github.com/jbossdemocentral/bpms-travel-agency-demo[Travel Agency Demo] process show below:
+BPMN2 processes can be composed of multiple processes. We can embed subprocess in the process definition of our main process, or we can re-use BPMN2 processes defined in th current project or defined in another projects. We call these processes _subprocesses_.
 
-image:images/org.specialtripsagency.specialtripsagencyprocess.png["Travel Agency Demo process", 1024]
+In our project we've already defined 2 processes that we use in our main process, the _calculatepriceprocess_ and the _compensateService_. In this lab we will add the _calculatepriceproces_ to our main process.
+
+image:images/specialtripsagencyproject.calculatepriceprocess.png["Calculate Price Process", 768]
+
+== Implementing the SubProcess node
+
+[start=1]
+. We're going to add the sub-process after the _Data-base Exclusive_ gateway when the data is not rejected. First we remove the connector between the gateway and the _Review Required check_.
+
+image:images/lab10-remove-connector.png["Remove Connector", 512]
+
+[start=2]
+. Add a _Reusable SubProcess_ node to the canvas and give it the name "Calculate Price". The _Reusable SubProcess_ node can be found under the _Subprocesses_ category in the palette.
+
+image:images/lab10-add-subprocess-node.png["Add SubProcess Node", 512]
+
+[start=3]
+. Connect the new _Reusable SubProcess_ node to the _Data-based Exclusive_ gateway and the _Review Required check_ script node.
+
+image:images/lab10-connect-subprocess-node.png["Connect SubProcess Node", 512]
+
+[start=4]
+. We first need to configure the subprocess to be called. Select the new _Reusable SubProcess_ node and open the properties panel on the right-hand-side of the editor. Click on the _Called Element_ field to open the _Called Elements_ editor. Select the _specialtripsagencyproject.calculatepriceprocess_ element and click "Save".
+
+image:images/lab10-called-elements.png["Called Elements", 512]
+
+[start=5]
+. We want to pass data from our main process to our subprocess. As with other nodes, this can be done via the _Assignments_ field in the properties of the node. This allows to configure the input and output data mappping of the subprocess. Select the new _Reusable SubProcess_ node and open the properties panel on the right-hand-side of the editor. Click on the _Assignments_ field to open the _Calculate Price Data I/O_ editor.
+
+image:images/lab10-calculate-price-data-io["Calculate Price Data I/O", 512]
+
+Add the following assignments:
+
+.Data Input Assignments
+|===
+|Name |Data Type |Source
+
+|Parameter
+|com.jboss.soap.service.acmedemo.FlightRequest
+|requestFlight
+
+|Url
+|String
+|"http://localhost:8080/acme-flight-service-1.0/AcmeDemoInterface?wsdl"
+
+|Mode
+|String
+|"SYNC"
+
+|Namespace
+|String
+|"http://service.soap.jboss.com/AcmeDemo/"
+
+|Interface
+|String
+|"AcmeDemoService"
+
+|Operation
+|String
+|"listAvailablePlanes"
+|===
 
 
+.Data Output Assignments
+|===
+|Name |Data Type |Target
 
-
-== Process
-The Travel Agency process consists of a main process (_specialtripsagencyprocess_) and 2 (reusable) sub-processes (_calculatepriceprocess_ and _compensateService_). The use-case of the process is booking a holiday, which includes booking a flight and hotel, and doing a payment. The high-level tasks are:
-
-* Start the process by providing the input data (e.g. name, e-mail address, origin, destination, travel-dates, etc.)
-* Retrieve flight and hotel information
-* Validate the data
-* Calculate the price.
-* Review the price of required.
-* Provide payment details.
-* Book flight and hotel
-
-For this workshop we've remove some steps from the final process. The goal of the exercises is to add the required steps to (re-)create the full process.
-
-Open JBoss BPMSuite Business Central at http://localhost:8080/business-central (u: bpmsAdmin, p: bpmsuite1!) and open the _specialtripsagencyprocess_. The inital process looks like this
-
-image:images/lab7-initial-process.png["Initial Travel Agency Process"]
+|Result
+|com.jboss.soap.service.acmedemo.Flight
+|resultFlight
+|===
 
 
 
