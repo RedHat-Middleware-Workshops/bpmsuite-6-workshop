@@ -40,51 +40,43 @@ image:images/lab10-connect-subprocess-node.png["Connect SubProcess Node", 512]
 image:images/lab10-called-elements.png["Called Elements", 512]
 
 [start=5]
-. We want to pass data from our main process to our subprocess. As with other nodes, this can be done via the _Assignments_ field in the properties of the node. This allows to configure the input and output data mappping of the subprocess. Select the new _Reusable SubProcess_ node and open the properties panel on the right-hand-side of the editor. Click on the _Assignments_ field to open the _Calculate Price Data I/O_ editor.
-
-image:images/lab10-calculate-price-data-io["Calculate Price Data I/O", 512]
-
-Add the following assignments:
+. We want to pass data from our main process to our subprocess. As with other nodes, this can be done via the _Assignments_ field in the properties of the node. This allows to configure the input and output data mappping of the subprocess. Select the new _Reusable SubProcess_ node and open the properties panel on the right-hand-side of the editor. Click on the _Assignments_ field to open the _Calculate Price Data I/O_ editor. Add the following data i/o assignments. Note that the assignments match the names of the process-variables in our subprocess. Because our subprocess modifies the `BookingObject`, we want to map that variable back to the process-variable of our main process.
 
 .Data Input Assignments
 |===
 |Name |Data Type |Source
 
-|Parameter
-|com.jboss.soap.service.acmedemo.FlightRequest
-|requestFlight
+|applicant
+|org.specialtripsagency.Applicant
+|applicant
 
-|Url
-|String
-|"http://localhost:8080/acme-flight-service-1.0/AcmeDemoInterface?wsdl"
+|bookingObject
+|org.specialtripsagency.BookingObject
+|bookingObject
 
-|Mode
-|String
-|"SYNC"
+|flight
+|org.specialtripsagency.FLight
+|flight
 
-|Namespace
-|String
-|"http://service.soap.jboss.com/AcmeDemo/"
-
-|Interface
-|String
-|"AcmeDemoService"
-
-|Operation
-|String
-|"listAvailablePlanes"
+|hotel
+|org.specialtripsagency.Hotel
+|hotel
 |===
-
 
 .Data Output Assignments
 |===
 |Name |Data Type |Target
 
-|Result
-|com.jboss.soap.service.acmedemo.Flight
-|resultFlight
+|bookingObject
+|org.specialtripsagency.BookingObject
+|bookingObject
 |===
 
+[start=6]
+Validate the process and save it using the "Save" button in the upper-right corner of the editor.
 
+== Conclusion
 
+In this lab we've added a Sub Process (_calculatepriceprocess_) to our process, which will determine the price of our booking. We've added input and output data mappings that allow us to pass data to, and retrieve data from the subprocess.
 
+In the next lab we will add a Human Task Form that allows users to interact with the process and it's data when the process is waiting on a human-task node.
