@@ -1,19 +1,62 @@
 = JBoss BPMSuite 6.x Workshop Labs
 
-== Lab 1: Exploring Business Central
+== Lab 2: Exploring the project
 
-You have been provided with a pre-defined and pre-installed runtime for these labs. The environment contains the following runtimes, tools and utilities:
-
-* JDK 1.8.0: The Java Development Kit, version 8
-* JBoss EAP 6.4.7.GA: The JBoss Enterprise Application Platform runtime on which JBoss BPMSuite runs (note that BPMSuite supports other containers as well).
-
+In this lab we will explore the provided project for this workshop.
 
 === Objectives
  
-* Explore the provided lab runtime.
-* Learn how to start and access the Business Central environment of JBoss BPMSuite.
-* Explore the various Authoring views: Adminisration, Artifact Repository and Project Authoring.
+* Explore the Business Central Project Authoring view
+* Explore the provided project
 
+== Introduction
+
+The objective of the workshop is to complete the Travel Agency Demo, one of our standard demo's provided on https://github.com/jbossdemocentral/bpms-travel-agency-demo[JBoss Demo Central].
+
+For this workshop we've adapted the standard project, by removing nodes from the process, removing rule definitions etc. The goal of this workshop is to complete the project and build a working BPMSuite solution.
+
+In this lab we will first explore the project, the process, the rules, etc.
+
+== Exploring the project
+
+[start=1]
+. Login to Business Central and open the _Authoring -> Project Authoring_ perspective.
+
+image:images/lab2-project-authoring.png["Project Authoring", 768]
+
+[start=2]
+. If the "Project Editor is not open yet, click on the _Open Project Editor_ button. The Project Editor allows to configure the name and version of the project, its dependencies, the runtime configuration (like runtime-strategy, marshallers, database configuration, ect.).
+
+image:images/lab2-deployment-descriptor.png["Deployment Descriptor", 768]
+
+[start=3]
+. The left-hand-side of the screen shows the various artefacts that have been defined in our project, like the BPMN2 Business Processes, DRL (rules), Form Definitions, etc. Our workshop project already has quite some artefacts pre-defined.
+
+image:images/lab2-project-artefacts.png["Project Artefacts", 256]
+
+[start=4]
+. Every artefact has a different editor. Expand the _Business Processes_ category and click on the _specialtripsagencyprocess_. This will open the process in the BPMN2 editor.
+
+image:images/lab2-bpmn2-editor.png["BPMN2 Editor", 768]
+
+[start=4]
+. Every artefact has a different editor. Expand the _Business Processes_ category and click on the _specialtripsagencyprocess_. This will open the process in the BPMN2 editor.
+
+image:images/lab2-bpmn2-editor.png["BPMN2 Editor", 768]
+
+[start=5]
+. Open the _AdditionalTravelersDiscount_ file in the _Guided Decision Tables_ category to open the decision table editor.
+
+image:images/lab2-decision-table-editor.png["Decision Table Editor", 512]
+
+[start=6]
+. Open some additional files to explore the various files and artefacts defined in the project.
+
+== Conclusion
+
+We've briefly explored the project that will serve as the base for our labs. We've seen the project editor, which allows us to define and configure various design-time and runtime properties of our project. We've seen various files and their respective editors, and should have gotten a basic overview of the structure of our project.
+
+In the next lab we will use the Data Modeler component to create (part of) the project's data-model. 
 
 
 
