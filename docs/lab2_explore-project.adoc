@@ -47,7 +47,7 @@ image:images/lab2-bpmn2-editor.png["BPMN2 Editor", 768]
 [start=5]
 . Open the _AdditionalTravelersDiscount_ file in the _Guided Decision Tables_ category to open the decision table editor.
 
-image:images/lab2-decision-table-editor.png["Decision Table Editor", 512]
+image:images/lab2-decision-table-editor.png["Decision Table Editor", 768]
 
 [start=6]
 . Open some additional files to explore the various files and artefacts defined in the project.
@@ -56,9 +56,4 @@ image:images/lab2-decision-table-editor.png["Decision Table Editor", 512]
 
 We've briefly explored the project that will serve as the base for our labs. We've seen the project editor, which allows us to define and configure various design-time and runtime properties of our project. We've seen various files and their respective editors, and should have gotten a basic overview of the structure of our project.
 
-In the next lab we will use the Data Modeler component to create (part of) the project's data-model. 
-
-
-
-
-
+In the next lab we will use the Data Modeler component to create (part of) the project's data-model.
