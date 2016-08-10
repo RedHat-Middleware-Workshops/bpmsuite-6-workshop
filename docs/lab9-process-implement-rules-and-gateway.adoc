@@ -37,7 +37,7 @@ image:images/lab9-connect-rule-node.png["Connect Rule Node", 256]
 image:images/lab9-ruleflow-group-editor.png["Ruleflow Group Editor", 256]
 
 [start=5]
-Our rules operate on, so called, _facts_. These _facts_ need to be inserted into the session for the rules to be able to operate on them. There are various ways to add _facts_ to the sessi
+. Our rules operate on, so called, _facts_. These _facts_ need to be inserted into the session for the rules to be able to operate on them. There are various ways to add _facts_ to the sessi
 on. We can, for example, use a script (either a script task or an on-entry script) to add the facts to the session. Another option is to use the input and output data-mapping of the rule-n
 ode.
 
