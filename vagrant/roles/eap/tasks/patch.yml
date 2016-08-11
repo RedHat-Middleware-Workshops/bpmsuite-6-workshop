@@ -1,0 +1,30 @@
+---
+# Installs an EAP Patch
+
+- name: Set EAP Patch Artifact Facts
+  set_fact:
+    eap_patch_artifact_url: "{{ eap_patch_artifact_repo + '/' + eap_patch_artifact_name }}"
+    eap_patch_artifact_dl_dest: "{{ '/tmp/' + eap_patch_artifact_name }}"
+
+- name: Debug EAP Patch Artifact URL
+  debug:
+    msg: "{{ eap_patch_artifact_url }}"
+
+- name: Debug EAP Download Destination
+  debug:
+    msg: "{{ eap_patch_artifact_dl_dest }}"
+
+#- name: Download EAP Patch Artifact
+#  get_url:
+#    url: "{{ eap_patch_artifact_url }}"
+#    dest: "{{ eap_patch_artifact_dl_dest }}"
+
+- name: Copy EAP Patch artifact
+  copy:
+    src: "{{ eap_patch_artifact_url }}"
+    dest: "{{eap_patch_artifact_dl_dest }}"
+
+- name: Apply JBoss EAP patch
+  command: /opt/jboss-as/jboss-eap-6.4/bin/jboss-cli.sh --command="patch apply /tmp/jboss-eap-6.4.7-patch.zip --override-modules"
+  become: true
+  become_user: "{{ jboss_user }}"

@@ -1,0 +1,23 @@
+---
+- name: Copy Business Central Application User/Role Configuration Files
+  sudo: true
+  copy:
+    src: "{{ item }}"
+    dest: "{{ eap_standalone_configuration_dir }}"
+    owner: "{{ jboss_user }}"
+    group: "{{ jboss_group }}"
+    mode: "755"
+  with_items:
+    - application-users.properties
+    - application-roles.properties
+
+
+- name: Create git hook directory
+  file:  path=/opt/jboss-as/git-hooks state=directory mode=0755 owner=jboss-as group=jboss-as
+
+- name: Copy post-commit hook
+  copy: src=post-commit dest=/opt/jboss-as/git-hooks/post-commit owner=jboss-as group=jboss-as mode=0775
+
+# TODO
+#- name: Copy private key?
+#  copy: src=files/post-commit dest=/home/fedora/git-hooks/post-commit owner=fedora group=fedora

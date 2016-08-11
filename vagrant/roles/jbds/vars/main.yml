@@ -1,0 +1,6 @@
+---
+# Installs a BPM Suite via Red Hat internal downloads
+# Update these to reflect your organizations artifact repos
+
+jbds_artifact_repo: /Volumes/JetDrive/Installables/JBoss
+jbds_artifact_name: jboss-devstudio-9.1.0.GA-installer-standalone.jar

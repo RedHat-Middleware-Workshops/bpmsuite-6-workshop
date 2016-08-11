@@ -1,0 +1,35 @@
+---
+# Installs JBoss Developer Studio
+# Corresponds to docker layer: https://github.com/sherl0cks/docker-eap
+
+- name: Set JBDS Artifact Facts
+  set_fact:
+    jbds_artifact_url: "{{ jbds_artifact_repo + '/' + jbds_artifact_name }}"
+    jbds_artifact_dl_dest: "{{ '/tmp/' + jbds_artifact_name }}"
+
+- name: Debug JBDS Artifact URL
+  debug:
+    msg: "{{ jbds_artifact_url }}"
+
+- name: Debug JBDS Download Destination
+  debug:
+    msg: "{{ jbds_artifact_dl_dest }}"
+
+- name: Copy JBDS artifact
+  copy:
+    src: "{{ jbds_artifact_url }}"
+    dest: "{{ jbds_artifact_dl_dest }}"
+
+- name: Copy JBDS installation config
+  sudo: false
+  copy:
+    src: InstallConfigRecord.xml
+    dest: /tmp/InstallConfigRecord.xml
+#    owner: "{{ jboss_user }}"
+#    group: "{{ jboss_group }}"
+    mode: "755"
+
+- name: Install JBDS
+  sudo: false
+  command: "{{ 'java -jar ' + jbds_artifact_dl_dest  + ' /tmp/InstallConfigRecord.xml' }}" 
+
