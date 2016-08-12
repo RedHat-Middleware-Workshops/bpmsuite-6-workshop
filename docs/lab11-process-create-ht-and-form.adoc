@@ -27,7 +27,7 @@ The human-task that we will use in this lab is the _Employee Booking_ human task
 
 image:images/lab11-employee-booking-ht.png["Employee Booking", 512]
 
-The humant task already has it's data input and output mapping defined. We can use this data in our form.
+The human task already has it's data input and output mapping defined. We can use this data in our form.
 
 image:images/lab10-employee-booking-ht-input-output-mapping.png["HT Input Output Mapping.", 512]
 
