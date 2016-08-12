@@ -93,7 +93,7 @@ image:images/lab7-webservice-node.png["WebService Node", 128]
 
 The _WebService Task Node_ is one of the 4 pre-defined "Service Tasks" in the JBoss BPMSuite platform. The service tasks allow for custom service task node implementations (backed by a WorkItemHandler implementation). Custom WorkItemHandlers are out-of-scope for this workshop, but more information on `WorkItemHandlers` can be found https://access.redhat.com/documentation/en-US/Red_Hat_JBoss_BPM_Suite/6.3/html/User_Guide/sect-Domain-specific_Tasks.html[here]
 
-image:images/lab7-service-tasks.png["Service Tasks", 512]
+image:images/lab7-service-tasks.png["Service Tasks", 256]
 
 The _WebService Task Node_ has the following input and output variables. Input and output variable values are mapped from and to process variables (or static values).
 
