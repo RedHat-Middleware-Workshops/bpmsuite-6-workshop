@@ -22,7 +22,7 @@
 
 - name: Copy BPMSuite artifact
   copy:
-    src: /Volumes/JetDrive/Installables/JBoss/jboss-bpmsuite-6.3.0.GA-deployable-eap6.x-ansible.zip
+    src: "{{ bpms_artifact_url }}"
     dest: "{{ bpms_artifact_dl_dest }}"
 
 # This should overlay the BPM download over EAP, intentionally overwriting some files in the process        

@@ -31,6 +31,12 @@
     home: "{{ eap_library_dest }}"
     shell: "/bin/bash"
 
+- name: Add vagrant user to JBoss Group
+  user:
+    name: vagrant
+    groups: "{{ jboss_group }}"
+    append: yes
+
 #- name: Download EAP Artifact
 #  get_url:
 #    url: "{{ eap_artifact_url }}"
@@ -56,20 +62,11 @@
   unarchive:
     src: "{{ eap_artifact_dl_dest }}"
     dest: "{{ eap_library_dest }}"
+#    creates: /opt/jboss-as/jboss-eap-6.4/jboss-modules.jar
     creates: jboss-eap-6.4
     copy: no
     owner: "{{ jboss_user }}"
     group: "{{ jboss_group }}"
-
-- name: Copy EAP Patch artifact
-  copy:
-    src: /Volumes/JetDrive/Installables/JBoss/jboss-eap-6.4.7-patch.zip
-    dest: /tmp/jboss-eap-6.4.7-patch.zip
-
-- name: Apply JBoss EAP patch
-  command: /opt/jboss-as/jboss-eap-6.4/bin/jboss-cli.sh --command="patch apply /tmp/jboss-eap-6.4.7-patch.zip --override-modules"
-  become: true
-  become_user: "{{ jboss_user }}"
 
 - include: patch.yml
 
