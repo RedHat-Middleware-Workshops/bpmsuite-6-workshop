@@ -3,7 +3,8 @@
 # https://access.redhat.com/documentation/en-US/JBoss_Enterprise_Application_Platform/6.4/html-single/Administration_and_Configuration_Guide/index.html#Example_PostgreSQL_XA_Datasource
 ###
 - name: Copy Kie Server standalone.xml and Application User/Role Files
-  sudo: true
+  become: true
+  become_user: root
   copy:
     src: "{{ item }}"
     dest: "{{ eap_standalone_configuration_dir }}"

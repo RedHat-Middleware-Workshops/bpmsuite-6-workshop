@@ -5,7 +5,8 @@
     state: latest
 
 - name: Copy Product Files
-  sudo: true
+  become: true
+  become_user: root
   copy:
     src: "{{ item }}"
     dest: "{{ httpd_document_root }}"

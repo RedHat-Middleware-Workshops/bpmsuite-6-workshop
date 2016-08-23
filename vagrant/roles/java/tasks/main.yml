@@ -2,7 +2,8 @@
 # Installs OpenJDK
 # Corresponds to docker layer: https://github.com/jboss-dockerfiles/base-jdk
 - name: Install OpenJDK - yum
-  sudo: true
+  become: true
+  become_user: root
   yum:
     name: "{{ 'java-' + java_version + '.0-openjdk-devel' }}"
     state: latest
@@ -10,7 +11,8 @@
   when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
 
 - name: Install OpenJDK - dnf
-  sudo: true
+  become: true
+  become_user: root
   dnf:
     name: "{{ 'java-' + java_version + '.0-openjdk-devel' }}"
     state: latest

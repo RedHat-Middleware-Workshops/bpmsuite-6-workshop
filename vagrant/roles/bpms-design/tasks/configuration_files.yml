@@ -1,6 +1,7 @@
 ---
 - name: Copy Business Central Application User/Role Configuration Files
-  sudo: true
+  become: true
+  become_user: root
   copy:
     src: "{{ item }}"
     dest: "{{ eap_standalone_configuration_dir }}"

@@ -27,7 +27,8 @@
 ###
 
 - name: Copy PostgreSQL module.xml
-  sudo: true
+  become: true
+  become_user: root
   copy:
     src: module.xml
     dest: "{{ postgresql.jdbc.module.dest }}"

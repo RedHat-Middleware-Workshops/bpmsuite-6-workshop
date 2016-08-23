@@ -6,7 +6,8 @@
     line: JAVA_OPTS="$JAVA_OPTS  -Djava.security.egd=file:/dev/./urandom"
 
 - name: Create Local Maven Directory
-  sudo: true
+  become: true
+  become_user: root
   file:
     path: /opt/jboss-as/.m2
     owner: "{{ jboss_user }}"
@@ -25,7 +26,8 @@
     line: JAVA_OPTS="$JAVA_OPTS -Dkie.maven.settings.custom=/opt/jboss-as/.m2/settings.xml"
 
 - name: Copy Maven settings.xml
-  sudo: true
+  become: true
+  become_user: root
   copy:
     src: settings.xml
     dest: /opt/jboss-as/.m2/settings.xml

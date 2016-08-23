@@ -1,5 +1,6 @@
 - name: Reload systemd
-  sudo: yes
+  become: yes
+  become_user: root
   command: systemctl daemon-reload
 
 - name: Start and Enable jboss-as Service

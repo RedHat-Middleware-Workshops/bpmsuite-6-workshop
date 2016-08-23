@@ -42,7 +42,8 @@
     dest: "{{eap_artifact_dl_dest }}"
 
 - name: Create JBoss Home Directory
-  sudo: true
+  become: true
+  become_user: root
   file:
     path: "{{ eap_library_dest }}"
     owner: "{{ jboss_user }}"
@@ -51,7 +52,8 @@
     mode: "755"
 
 - name: Extract EAP Libraries
-  sudo: true
+  become: true
+  become_user: root
   unarchive:
     src: "{{ eap_artifact_dl_dest }}"
     dest: "{{ eap_library_dest }}"

@@ -21,7 +21,6 @@
     dest: "{{ jbds_artifact_dl_dest }}"
 
 - name: Copy JBDS installation config
-  sudo: false
   copy:
     src: InstallConfigRecord.xml
     dest: /tmp/InstallConfigRecord.xml
@@ -30,6 +29,5 @@
     mode: "755"
 
 - name: Install JBDS
-  sudo: false
   command: "{{ 'java -jar ' + jbds_artifact_dl_dest  + ' /tmp/InstallConfigRecord.xml' }}" 
 
