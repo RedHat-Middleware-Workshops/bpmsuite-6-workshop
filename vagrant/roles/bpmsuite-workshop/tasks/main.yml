@@ -1,0 +1,44 @@
+---
+# Adds the BPMSuite workshop Git repositories.
+
+- name: Delete existing Git repositories
+  file:
+    path: "{{ git_repo_dest }}"
+    state: absent
+
+- name: Copy DataSets Git repository
+  copy:
+    owner: "{{ jboss_user }}"
+    group: "{{ jboss_group }}"
+    src: "bpm-suite-demo-niogit/datasets.git"
+    dest: "{{ git_repo_dest }}"
+
+- name: Copy Plugins Git repository
+  copy:
+    owner: "{{ jboss_user }}"
+    group: "{{ jboss_group }}"
+    src: "bpm-suite-demo-niogit/plugins.git"
+    dest: "{{ git_repo_dest }}"
+
+- name: Copy System Git repository
+  copy:
+    owner: "{{ jboss_user }}"
+    group: "{{ jboss_group }}"
+    src: "bpm-suite-demo-niogit/system.git"
+    dest: "{{ git_repo_dest }}"
+
+#- name: Clone workshop Git repo
+#  command: git clone --bare https://github.com/RedHat-Middleware-Workshops/bpmsuite-6-workshop-lab-repo /opt/jboss-as/jboss-eap-6.4/.niotest/specialtripsagency.git
+#  become: true
+#  become_user: "{{ jboss_user }}"
+
+- name: Clone workshop Git repo
+  git:
+    repo: "{{ git_workshop_repo_src}}" 
+    bare: yes
+    dest: "{{ git_workshop_repo_dest }}"
+  become: yes
+  become_user: "{{ jboss_user }}"
+  notify: 
+    - Restart jboss-as Service
+

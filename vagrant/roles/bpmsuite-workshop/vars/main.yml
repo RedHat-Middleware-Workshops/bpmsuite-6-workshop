@@ -1,0 +1,12 @@
+---
+# JBoss BPMSuite 6 Workshop Git artifacts.
+
+git_repo_dest: /opt/jboss-as/jboss-eap-6.4/.niogit
+
+git_workshop_repo_src: https://github.com/RedHat-Middleware-Workshops/bpmsuite-6-workshop-lab-repo
+git_workshop_repo_dest: /opt/jboss-as/jboss-eap-6.4/.niogit/specialtripsagency.git
+
+jboss_user: jboss-as
+jboss_group: jboss-as
+
+

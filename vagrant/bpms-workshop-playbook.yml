@@ -1,5 +1,4 @@
 - hosts: default
-#  remote_user: "{{ distro_cloud_user }}"
   remote_user: vagrant
   become: true
   become_method: sudo
@@ -7,42 +6,9 @@
 #  sudo: true
   roles:
     - centos
+    - gnome
+    - bpmsuite-workshop
   tags:
     - centos
-
-- hosts: default
-#  remote_user: "{{ distro_cloud_user }}"
-  remote_user: vagrant
-  become: true
-  become_method: sudo
-  become_user: root 
-#  sudo: true
-  roles:
     - gnome
-  tags:
-    - gnome
-
-- hosts: default
-#  remote_user: "{{ distro_cloud_user }}"
-  remote_user: vagrant
-  become: true
-  become_method: sudo
-  become_user: root
-#  sudo: true
-  roles:
-    - bpms-design
-  tags:
-    - bpms-design
-
-
-- hosts: default
-#  remote_user: "{{ distro_cloud_user }}"
-  remote_user: vagrant
-  become: true
-  become_method: sudo
-  become_user: root
-#  sudo: true
-  roles:
-    - jbds
-  tags:
-    - jbds
+    - bpmsuite-workshop

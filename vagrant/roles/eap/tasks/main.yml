@@ -31,12 +31,6 @@
     home: "{{ eap_library_dest }}"
     shell: "/bin/bash"
 
-- name: Add vagrant user to JBoss Group
-  user:
-    name: vagrant
-    groups: "{{ jboss_group }}"
-    append: yes
-
 #- name: Download EAP Artifact
 #  get_url:
 #    url: "{{ eap_artifact_url }}"
@@ -46,7 +40,6 @@
   copy:
     src: "{{ eap_artifact_url }}"
     dest: "{{eap_artifact_dl_dest }}"
-
 
 - name: Create JBoss Home Directory
   sudo: true
@@ -62,8 +55,7 @@
   unarchive:
     src: "{{ eap_artifact_dl_dest }}"
     dest: "{{ eap_library_dest }}"
-#    creates: /opt/jboss-as/jboss-eap-6.4/jboss-modules.jar
-    creates: jboss-eap-6.4
+    creates: /opt/jboss-as/jboss-eap-6.4/jboss-modules.jar
     copy: no
     owner: "{{ jboss_user }}"
     group: "{{ jboss_group }}"

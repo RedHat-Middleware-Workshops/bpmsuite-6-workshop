@@ -25,6 +25,8 @@
     dest: "{{eap_patch_artifact_dl_dest }}"
 
 - name: Apply JBoss EAP patch
-  command: /opt/jboss-as/jboss-eap-6.4/bin/jboss-cli.sh --command="patch apply /tmp/jboss-eap-6.4.7-patch.zip --override-modules"
+  command: /opt/jboss-as/jboss-eap-6.4/bin/jboss-cli.sh --command='patch apply /tmp/jboss-eap-6.4.7-patch.zip --override-modules' 
+  args:
+    creates: /opt/jboss-as/jboss-eap-6.4/modules/system/layers/base/.overlays/layer-base-jboss-eap-6.4.7.CP/org/jboss/as/version/main/jboss-as-version-7.5.7.Final-redhat-3.jar
   become: true
   become_user: "{{ jboss_user }}"
