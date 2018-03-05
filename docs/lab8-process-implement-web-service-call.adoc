@@ -88,16 +88,24 @@ Set the following values to the assignments. Note that some of the assignments a
 |resultFlight
 |===
 
-
 [start=5]
-. Finally, we can change the color of the new WS Task Node to match the color we use for WS Task Nodes in our model. Select the "Flight Web Service" node and open the properties panel. Click on the_Background Color_ field and select a color. To match the color of the Hotel Web Service, we use color "#00FFFF"
+. We need to map the _resultFlight_ variable, the result of the webservice call back onto the variable _memFlight_ variable that we will use in the remainder of the process instance. We can do this in the "On Exit Actions" script of our "Flight Web Service" node. By clicking on the "On Exit Actions" property in the properties field, the script editor will open. Add the following Java code in the script editor:
+
+----
+kcontext.setVariable("memFlight",resultFlight);
+----
+
+image:images/lab8-on-exit-variable-mapping.png["Map the response variable", 512]
 
 [start=6]
-. Validate the process definition by starting the validator of the process designer.
-
-image:images/lab8-start-validating.png["Validate the process", 256]
+. Finally, we can change the color of the new WS Task Node to match the color we use for WS Task Nodes in our model. Select the "Flight Web Service" node and open the properties panel. Click on the_Background Color_ field and select a color. To match the color of the Hotel Web Service, we use color "#00FFFF"
 
 [start=7]
+. Validate the process definition by starting the validator of the process designer.
+
+image:images/lab8-start-validating.png["Validate the process", 768]
+
+[start=8]
 . If the process is valid, save it by clicking on the _Save_ button in the upper rigth corner of the editor.
 
 == Conclusion
