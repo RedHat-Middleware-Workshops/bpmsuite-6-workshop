@@ -79,8 +79,7 @@ image:images/lab4-guided-rule-constraint-operator.png["Guided Rule Constraint Op
 . To add the list of values, click on the pencil sign next to the operator. This will open an editor in which we need to click on "Literal Value". A text-field is created on the right-hand-side of the operator. In this field, add the following comma separated list of values: _London,Gatwick,Farnborough_
 
 
-image:images/
-.png["Guided Rule List of Values", 512]
+image:images/lab4-guided-rule-list-of-values.png["Guided Rule List of Values", 512]
 
 [start=8]
 . Now that we've defined the Left-Hand-Side (LHS) of the rule (i.e. the constraints), we need to add the consequence, or Right-Hand-Side (RHS). The RHS defines the action to be executed when the rule matches and fires. Click on the "+" sign next to the _Then_ label in the editor. This will open a wizard in which you can add a new _action_ to the rule. Select _Insert fact Rejection_ and click "OK".
