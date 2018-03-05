@@ -5,7 +5,7 @@
 In this lab we will implement a Rule node which will execute/enable the _rejection_ rules, and a Data-based Exclusive gateway and sequence flow conditions that provides conditional routing within the process.
 
 === Objectives
- 
+
 * Learn how to use the JBoss BPMSuite Rule Node.
 * Learn how to enable rule execution based on _ruleflow-groups_.
 * Learn how to define conditions on sequence flows for conditional routing in processes.
@@ -85,7 +85,7 @@ Note that the output-mapping causes the facts to be removed from the rules-sessi
 
 [source, drl]
 ----
-exists Rejection()
+exists org.specialtripsagency.Rejection()
 ----
 
 [start=7]
@@ -94,7 +94,7 @@ exists Rejection()
 
 [source, drl]
 ----
-not Rejection()
+not org.specialtripsagency.Rejection()
 ----
 
 [start=8]
@@ -110,5 +110,3 @@ image:images/lab9-complete.png["Complete", 256]
 In this lab we've added a Rule Node that will execute our business rules and conditions on our gateway sequence flows that route our process based on the outcome of our rules.
 
 In the next lab we will add a Subprocess Node which adds the calculation sub-process to our process definition.
-
-

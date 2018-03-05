@@ -5,7 +5,7 @@
 In this lab we will add an additional rule to the "rejection" _ruleflow-group_. The rule will be written in the Drools Rule Language (DRL) and will check whether the provided e-mail address is valid.
 
 === Objectives
- 
+
 * Learn how to use the Drools Rule Language.
 * Implement a rule that checks whether the provided e-mail address is valid.
 
@@ -80,7 +80,7 @@ We can define any sort of Java logic in the RHS of our rule. In this case we cre
 rule "ApplicantInvalidEmailAddress"
    ruleflow-group "rejection"
 when
-   applicant : Applicant(emailAddress == null || !emailAddress.matches(".*[@].*") )_
+   applicant : Applicant(emailAddress == null || !emailAddress.matches(".*[@].*"))
 then
    Rejection rejection = new Rejection();
    rejection.setReason( "Invalid Email Address of Applicant!!!" );

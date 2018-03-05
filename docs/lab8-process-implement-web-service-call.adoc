@@ -5,7 +5,7 @@
 In this lab we will implement the WebService call from the JBoss BPMSuite process to the Flight WebService.
 
 === Objectives
- 
+
 * Learn how to use the JBoss BPMSuite WebServiceWorkItemHandler
 * Learn how to map process data to WorkItemHandlers
 * Learn how to call a WebService from a JBoss BPMSuite process
@@ -27,7 +27,7 @@ The Flight WebService has been deployed on the JBoss Enterprise Application Plat
 
 == Implementing the WebService call
 [start=1]
-. The WebService call to the Flight Service will execute in parallel with the call to the Hotel Service wis has already been defined in our process model. We therefore first need to add a diverging and converging parallel  gateway to our process.
+. The WebService call to the Flight Service will execute in parallel with the call to the Hotel Service which has already been defined in our process model. We therefore first need to add a diverging and converging parallel  gateway to our process.
 
 image:images/lab8-add-parallel-gateways.png["Add Parallel Gateways", 512]
 
@@ -59,7 +59,7 @@ Set the following values to the assignments. Note that some of the assignments a
 
 |Url
 |String
-|"http://localhost:8080/acme-flight-service-1.0/AcmeDemoInterface?wsdl"	
+|"http://localhost:8080/acme-flight-service-1.0/AcmeDemoInterface?wsdl"
 
 |Mode
 |String
