@@ -20,7 +20,9 @@ In this first lab we will explore the JBoss BPMSuite Business-Central environmen
 
 == Starting and accessing the platform
 [start=1]
-. Your VM comes with JBoss BPMSuite pre-installed (to learn how to install JBoss BPMSuite, please consult the "Getting Started" guide on http://developers.redhat.com/products/bpmsuite/get-started/[developers.redhat.com]. To start the platform, open a terminal, navigate to _/opt/jboss/jboss-eap-6.4/bin_ and execute the _standalone.sh_ script. This will start the JBoss BPMSuite platform deployed on JBoss Enterprise Application Platform. The platform has started succesfully when the following message is displayed on the console:
+. Your VM comes with JBoss BPMSuite pre-installed (to learn how to install JBoss BPMSuite, please consult the "Getting Started" guide on http://developers.redhat.com/products/bpmsuite/get-started/[developers.redhat.com]. 
+
+- The platform should be already started; Otherwise, to start the platform, open a terminal, navigate to _/opt/jboss-as/jboss-eap-6.4/bin_ and execute the _standalone.sh_ script. This will start the JBoss BPMSuite platform deployed on JBoss Enterprise Application Platform. The platform has started succesfully when the following message is displayed on the console:
 
 `08:32:45,714 INFO  [org.jboss.as] (Controller Boot Thread) JBAS015874: JBoss EAP 6.4.7.GA (AS 7.5.7.Final-redhat-3) started in 44379ms - Started 1293 of 1330 services (93 services are lazy, passive or on-demand)`
 
