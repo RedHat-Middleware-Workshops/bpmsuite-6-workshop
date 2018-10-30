@@ -27,13 +27,6 @@
 
 - name: Install Basic Packages
   yum:
-    name: "{{ item }}"
+    name: ['git', 'vim', 'unzip','yum-cron', 'wget']
     state: latest
 #    enablerepo: rhel-7-server-optional-rpms
-  with_items:
-    - git
-    - vim
-    - unzip
-    - yum-cron
-    - wget
-
