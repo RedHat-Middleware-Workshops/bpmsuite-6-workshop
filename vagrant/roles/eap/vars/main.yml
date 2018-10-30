@@ -4,13 +4,16 @@
 
 #eap_artifact_repo: http://files.justinholmes.co
 #eap_artifact_name: jboss-eap-6.4.5-full-build.zip
-eap_artifact_repo: /Volumes/JetDrive/Installables/JBoss
+eap_artifact_repo: /Users/rsoares/Downloads
 eap_artifact_name: jboss-eap-6.4.0.zip
 
 eap_library_dest: /opt/jboss-as
 
-eap_patch_artifact_repo: /Volumes/JetDrive/Installables/JBoss
-eap_patch_artifact_name: jboss-eap-6.4.7-patch.zip
+eap_patch_artifact_repo: /Users/rsoares/Downloads
+eap_patch_artifact_names:
+  - jboss-eap-6.4.9-patch.zip
+  - jboss-eap-6.4.19-patch.zip
+  - jboss-eap-6.4.21-patch.zip
 
 eap_service_conf_dir: /etc/jboss-as
 eap_service_conf_file: /etc/jboss-as/jboss-as.conf
