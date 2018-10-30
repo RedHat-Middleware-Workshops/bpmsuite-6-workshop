@@ -1,0 +1,36 @@
+---
+# Installs an BPMS Patch
+
+- name: Set BPMS Patch Artifact Facts
+  set_fact:
+    bpms_patch_artifact_url: "{{ bpms_patch_artifact_repo + '/' + bpms_patch_artifact_name }}"
+    bpms_patch_artifact_dl_dest: "{{ '/tmp/' + bpms_patch_artifact_name }}"
+
+- name: Debug BPMS Patch Artifact URL
+  debug:
+    msg: "{{ bpms_patch_artifact_name }}"
+
+- name: Debug BPMS Download Destination
+  debug:
+    msg: "{{ bpms_patch_artifact_dl_dest }}"
+
+- name: Copy BPMS Patch artifact
+  copy:
+    src: "{{ bpms_patch_artifact_url }}"
+    dest: "{{ bpms_patch_artifact_dl_dest }}"
+
+- name: Unzip bpms patch
+  unarchive:
+    src: "{{ bpms_patch_artifact_dl_dest }}"
+    dest: /tmp
+    remote_src: yes
+    creates: /tmp/bpms_patch_artifact_name.split('.')[0]
+    owner: "{{ jboss_user }}"
+    group: "{{ jboss_group }}"
+
+- name: Apply JBoss BPMS patch
+  command: ./apply-updates.sh "{{ eap_home }}" eap6.x
+  args:
+    chdir: /tmp/bpms_patch_artifact_name.split('.')[0]
+  become: true
+  become_user: "{{ jboss_user }}"
