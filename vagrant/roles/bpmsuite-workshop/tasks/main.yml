@@ -39,6 +39,8 @@
     dest: "{{ git_workshop_repo_dest }}"
   become: yes
   become_user: "{{ jboss_user }}"
-  notify: 
+  notify:
     - Restart jboss-as Service
 
+#- name: Deploy SOAP WebServices
+#- name: Deploy DataModel used by WebServices

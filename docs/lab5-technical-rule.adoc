@@ -44,7 +44,7 @@ _import org.specialtripsagency.Rejection;_
 image:images/lab5-new-drl-imports.png["New DRL Imports", 512]
 
 [start=4]
-. We can now start creating the actual rule. We will first define the skeleton of the rule. A rule consists of a name, attributes, a left-hand-side and a right-hand-side. Add the following skeleton to the DRL file
+. We can now start creating the actual rule. We will first define the skeleton of the rule. A rule consists of a **name**, **attributes**, a **left-hand-side** and a **right-hand-side**. Add the following skeleton to the DRL file
 [source, drl]
 ----
 rule "ApplicantInvalidEmailAddress"
@@ -59,9 +59,9 @@ end
 . The first thing we want to add to the rule is LHS, the condition. We add the following line to the _when_ part of the rule:
 [source, drl]
 ----
-applicant : Applicant(emailAddress == null || !emailAddress.matches(".*[@].*") )_
+applicant : Applicant(emailAddress == null || !emailAddress.matches(".*[@].*"))
 ----
-This line states that we match on an _Applicant_ fact that either has no _emailAddress_ or that has an _emailAddress_ that does not match the given regulare expression.
+This line states that we match on an _Applicant_ fact that either has no _emailAddress_ or that has an _emailAddress_ that does not match the given regular expression.
 
 [start=6]
 . Next we add the RHS, or consequence, of the rule. If the rule matches, we want to insert a new _Rejection_ fact into the session with a proper message set on it's _reason_ field. We do this by adding the following line in the _then_ part of the rule.

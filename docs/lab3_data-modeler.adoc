@@ -1,6 +1,6 @@
 = JBoss BPMSuite 6.x Workshop Labs
 
-== Lab 2: Data Modeler
+== Lab 3: Data Modeler
 
 In this lab we will complete the data-model required by the Travel Agency Demo by defining the 'Applicant' data-type using the the JBoss BPMSuite data-modeller.
 

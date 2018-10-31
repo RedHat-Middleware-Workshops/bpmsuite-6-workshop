@@ -13,7 +13,7 @@ In this lab we will implement a discount calculation rule using a decision table
 == Use Case
 So far we've seen 2 ways to implement a business rule in BPMSuite project. In this lab we will look at a third way: decision tables.
 
-Decision tables are probably the most business-friendly way to define rules. The decision table layout provides a pre-defined rule template where each column defines either a rule attribute (e.g. "salience", "ruleflow-group", etc.), a condition (LHS) or a consequence (RHS). Each row in a decision table gets translated into an individual rule.
+Decision tables are probably the most business-friendly way to define rules. The decision table layout provides a pre-defined rule template where each column defines either a **rule attribute** (e.g. "salience", "ruleflow-group", etc.), a **condition (LHS)** or a **consequence (RHS)**. Each row in a decision table gets translated into an individual rule.
 
 At compile time, decision tables are compiled into DRL.
 
@@ -31,9 +31,9 @@ image:images/lab6-decision-table.png["New DRL File", 1024]
 
 The decision table has:
 
-* 2 Attribute columns: the _no-loop_ column (which defines that the consequence of a rule cannot reactivate itself) and the _ruleflow-group_ attribute (which is by default set to "discount")
-* 3 Condition columns: one condition on the _Flight_ fact, and two conditions on the _Applicant_ fact.
-* 1 Action column: an action column which sets the _priceDiscount_ field on the _Flight_ fact.
+* **2 Attribute columns**: the _no-loop_ column (which defines that the consequence of a rule cannot reactivate itself) and the _ruleflow-group_ attribute (which is by default set to "discount")
+* **3 Condition columns**: one condition on the _Flight_ fact, and two conditions on the _Applicant_ fact.
+* **1 Action column**: an action column which sets the _priceDiscount_ field on the _Flight_ fact.
 
 New attribue,condition and action columns can be defined by clicking on the "+ New column" button at the top of the editor.
 
