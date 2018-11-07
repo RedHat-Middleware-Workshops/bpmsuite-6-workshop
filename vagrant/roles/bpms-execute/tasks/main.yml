@@ -7,7 +7,7 @@
 - name: Remove Business Central Deployment Marker
   file:
     state: absent
-    path: "{{ bpms_business_central_location + '.dodeploy' }}" 
+    path: "{{ bpms_business_central_location + '.dodeploy' }}"
 
 - name: Remove Dashbuilder WAR
   file:
@@ -21,4 +21,4 @@
 
 - include: configuration_files.yml
 
-- include: java_opts.yml       
+- include: java_opts.yml

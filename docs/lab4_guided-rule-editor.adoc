@@ -12,21 +12,21 @@ In this lab we will create a rule, using the Guided Rule Editor, that validates 
 == Use Case
 JBoss BPMSuite business rules allow to separate the process and process implementation from the business rules underlying the process. These business rules can provide all sorts of functionality:
 
-* Data validation: determine if the process input data is valid.
-* Calculation: calculate the price of the offer. This can for example include discounts, shipping costs, etc.
-* Compliancy: determine whether the data is compliant with the law, rules and regulations. E.g. is a passport still valid for 6 months on the day of departure.
+* **Data validation**: determine if the process input data is valid.
+* **Calculation**: calculate the price of the offer. This can for example include discounts, shipping costs, etc.
+* **Compliancy**: determine whether the data is compliant with the law, rules and regulations. E.g. is a passport still valid for 6 months on the day of departure.
 
 JBoss BPMSuite comes with integrated JBoss BRMS functionality. BRMS allows to write rules in all sorts of formats:
 
-* Drools Rule Language (DRL)
-* Guided Rules
-* Decision Tables
+* **Drools Rule Language (DRL)**
+* **Guided Rules**
+* **Decision Tables**
 
 In this lab we will implement a Guided Rule that determines whether the _From Destination_ provided in the input data is valid. In this example, the _From Destination_ is said to be valid if it has one of the following values:
 
-* London
-* Gatwick
-* Farnborough
+* **João Pessoa**
+* **Recife**
+* **Salvador**
 
 If the destination is not in this list, we add a _fact_ called _Rejection_ to the KieSession. This allows us to later act on the presence of this fact to determine the route to take in the process. E.g. if there is a _Rejection_ fact present in the process session, we can decide that we want to route to a HumanTask to fix the input data.
 
@@ -66,7 +66,7 @@ image:images/lab4-guided-rule-new-data-object.png["Guided Rule New Data Object",
 image:images/lab4-guided-rule-add-condition.png["Guided Rule Add Condition", 512]
 
 [start=5]
-. We need to add a _constraint_ to the _condition_ we have just created. I.e. the specification states that we the value of the _fromDestination_ field of the _TravelDetails_ fact should have either the value _London_, _Gatwick_ or _Farnborough_. To add a _constraint_ the the condition, click on the _condition_ in the editor. In our case we need to click on "There is TravelDetails". This will open the "Modify constraints for TravelDetails" wizard. In this wizard, select "fromDestination" in the "Add a restriction on a field" drop-down list.
+. We need to add a _constraint_ to the _condition_ we have just created. I.e. the specification states that the value of the _fromDestination_ field of the _TravelDetails_ fact should have either the value _João Pessoa_, _Recife_ or _Salvador_. To add a _constraint_ the the condition, click on the _condition_ in the editor. In our case we need to click on "There is TravelDetails". This will open the "Modify constraints for TravelDetails" wizard. In this wizard, select "fromDestination" in the "Add a restriction on a field" drop-down list.
 
 image:images/lab4-guided-rule-modify-constraint.png["Guided Rule Modify Constraint", 512]
 
@@ -76,7 +76,7 @@ image:images/lab4-guided-rule-modify-constraint.png["Guided Rule Modify Constrai
 image:images/lab4-guided-rule-constraint-operator.png["Guided Rule Constraint Operator", 512]
 
 [start=7]
-. To add the list of values, click on the pencil sign next to the operator. This will open an editor in which we need to click on "Literal Value". A text-field is created on the right-hand-side of the operator. In this field, add the following comma separated list of values: _London,Gatwick,Farnborough_
+. To add the list of values, click on the pencil sign next to the operator. This will open an editor in which we need to click on "Literal Value". A text-field is created on the right-hand-side of the operator. In this field, add the following comma separated list of values: _João Pessoa,Recife,Salvador_
 
 
 image:images/lab4-guided-rule-list-of-values.png["Guided Rule List of Values", 512]

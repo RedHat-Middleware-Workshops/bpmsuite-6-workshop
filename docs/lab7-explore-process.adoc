@@ -11,22 +11,22 @@ In this lab we will explore the initial process that we will use in the remainde
 
 == Introduction
 
-In this lab we will explore the initial process provided in the workshop. In further labs we will expend this process, with the goal to finally implement the full https://github.com/jbossdemocentral/bpms-travel-agency-demo[Travel Agency Demo] process show below:
+In this lab we will explore the initial process provided in the workshop. In further labs we will expand this process, with the goal to finally implement the full https://github.com/jbossdemocentral/bpms-travel-agency-demo[Travel Agency Demo] process show below:
 
 image:images/org.specialtripsagency.specialtripsagencyprocess.png["Travel Agency Demo process", 1024]
 
 == Process
 The Travel Agency process consists of a main process (_specialtripsagencyprocess_) and 2 (reusable) sub-processes (_calculatepriceprocess_ and _compensateService_). The use-case of the process is booking a holiday, which includes booking a flight and hotel, and doing a payment. The high-level tasks are:
 
-* Start the process by providing the input data (e.g. name, e-mail address, origin, destination, travel-dates, etc.)
-* Retrieve flight and hotel information
-* Validate the data
-* Calculate the price.
-* Review the price of required.
-* Provide payment details.
-* Book flight and hotel
+* **Start the process by providing the input data (e.g. name, e-mail address, origin, destination, travel-dates, etc.)
+* **Retrieve flight and hotel information**.
+* **Validate the data**.
+* **Calculate the price**.
+* **Review the price of required**.
+* **Provide payment details**.
+* **Book flight and hotel**.
 
-For this workshop we've remove some steps from the final process. The goal of the exercises is to add the required steps to (re-)create the full process.
+For this workshop we've removed some steps from the final process. The goal of the exercises is to add the required steps to (re-)create the full process.
 
 Open JBoss BPMSuite Business Central at http://localhost:8080/business-central (u: bpmsAdmin, p: bpmsuite1!) and open the _specialtripsagencyprocess_. The inital process looks like this
 
@@ -34,7 +34,7 @@ image:images/lab7-initial-process.png["Initial Travel Agency Process"]
 
 == Proces Variables
 
-To work with data in a process, a process requires process variables. Process variables are stored in the process context (or _kcontext_) and are accessible anywhere in the process. By default, the variales are stores with the process instance in BLOB format in the BPMSuite database. To serialize/marshall the process variables, JBoss BPMSuite relies on Java Serialization. This means that all process variables need to be of a data type that implements the `Serializable` interface.
+To work with data in a process, a process requires process variables. Process variables are stored in the process context (or _kcontext_) and are accessible anywhere in the process. By default, the variales are stored within the process instance in BLOB format in the BPMSuite database. To serialize/marshall the process variables, JBoss BPMSuite relies on Java Serialization. This means that all process variables need to be of a data type that implements the `Serializable` interface.
 
 As JBoss BPMSuite is a very flexible platform, it also allows to store process variables at a different location than the BLOB format of the process instance. This can be accomplished by implementing a custom _Marshalling Strategy_ for the process variables. This _Marshalling Strategy_ can then be configurd on the https://access.redhat.com/documentation/en-US/Red_Hat_JBoss_BPM_Suite/6.3/html/Administration_And_Configuration_Guide/sect-Deployment_Descriptors.html[Deployment Descriptor] of the deployment unit (KJAR).
 
@@ -53,7 +53,7 @@ image:images/lab7-process-properties-editor.png["Process Properties", 512]
 image:images/lab7-process-variable-editor.png["Process Variable Editor", 512]
 
 [start=5]
-. The editor allows us to add, edit and delete process variables. In the editor we can see that we can define both process variables of primitive types, as well as process variables of complex types. The only requirement is that the complex either needs to implement the `Serializable` interface, or that a custom _Marshalling Strategy has been defined and configured for the complex type.
+. The editor allows us to add, edit and delete process variables. In the editor we can see that we can define both process variables of primitive types, as well as process variables of complex types. The only requirement is that the complex either needs to implement the `Serializable` interface, or that a custom _Marshalling Strategy_ has been defined and configured for the complex type.
 
 == Process Nodes
 
@@ -134,7 +134,7 @@ As with the WebService Task Node, process variables can be mapped to and from a 
 
 Human tasks need to have a unique name (which also controls their mapping to a human-task form). Human tasks can be assigned to an actor (user) or a list of actors, or to groups (or a list of groups). Only people with the given username or group membership are allowed to work on the task.
 
-The JBoss BPMSuite Human Task engine is based on the WS-HumanTask standard. It provides features like delegation, escalation, re-assignment of tasks, etc. More information on the Human Task engine can be found [here]
+The JBoss BPMSuite Human Task engine is based on the WS-HumanTask standard. It provides features like delegation, escalation, re-assignment of tasks, etc. More information on the Human Task engine can be found https://access.redhat.com/documentation/en-us/red_hat_jboss_bpm_suite/6.4/html/development_guide/chap_human_tasks_management[here]
 
 == Subprocesses
 
@@ -160,13 +160,13 @@ Gateways allow us to split a path into 2 or more (parallel) paths to accompany f
 
 The decision logic that determines which path to take in a diverging gateway is configured on the edges (sequence flows) leaving the gateway, not on the gateway node itself. The conditional logic can be configured by selecting an edge, opening the properties panel, and configuring the _Expression_ field. Note that the expression can be defined in:
 
-* Drools: the rule language. The condition is defined as a Drools left-hand-side (LHS) constraint.
-* Java: the condition is defined as a Java `return` statement which must return a boolean.
-* Javascript: the condition is defined as a Javascript expression which must return a boolean.
-* MVEL: the condition is defined as an MVEL expression which must return a boolean.
+* **Drools**: the rule language. The condition is defined as a Drools left-hand-side (LHS) constraint.
+* **Java**: the condition is defined as a Java `return` statement which must return a boolean.
+* **Javascript**: the condition is defined as a Javascript expression which must return a boolean.
+* **MVEL**: the condition is defined as an MVEL expression which must return a boolean.
 
 
 == Conclusion
 
-In this lab we explored the pre-defined _specialtripsagencyprocess_ that will serve as the base for the remained of our workshop. We've discussed a number of the more widely used BPMN2 nodes and constructs and inspected their configuration. This has shows us the basic approach how to define BPMN2 business processes in JBoss BPMSuite and should be a solid base for the remained of this workshop.
+In this lab we explored the pre-defined _specialtripsagencyprocess_ that will serve as the base for the remained of our workshop. We've discussed a number of the more widely used BPMN2 nodes and constructs and inspected their configuration. This has shown us the basic approach on how to define BPMN2 business processes in JBoss BPMSuite and should be a solid base for the remained of this workshop.
 

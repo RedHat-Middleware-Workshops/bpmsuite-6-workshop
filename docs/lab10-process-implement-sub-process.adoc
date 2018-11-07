@@ -11,7 +11,7 @@ In this lab we will implementn call a (reusable) SubProcess from our main proces
 
 == Introduction
 
-BPMN2 processes can be composed of multiple processes. We can embed subprocess in the process definition of our main process, or we can re-use BPMN2 processes defined in th current project or defined in another projects. We call these processes _subprocesses_.
+BPMN2 processes can be composed of multiple processes. We can embed a subprocess in the  definition of our main process, or we can re-use BPMN2 processes defined in th current project or defined in another projects. We call these processes _subprocesses_.
 
 In our project we've already defined 2 processes that we use in our main process, the _calculatepriceprocess_ and the _compensateService_. In this lab we will add the _calculatepriceproces_ to our main process.
 

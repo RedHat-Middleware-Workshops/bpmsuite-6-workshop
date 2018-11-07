@@ -38,8 +38,7 @@ image:images/lab9-ruleflow-group-editor.png["Ruleflow Group Editor", 256]
 
 [start=5]
 . Our rules operate on, so called, _facts_. These _facts_ need to be inserted into the session for the rules to be able to operate on them. There are various ways to add _facts_ to the sessi
-on. We can, for example, use a script (either a script task or an on-entry script) to add the facts to the session. Another option is to use the input and output data-mapping of the rule-n
-ode.
+on. We can, for example, use a script (either a script task or an on-entry script) to add the facts to the session. Another option is to use the input and output data-mapping of the rule-node.
 
 In this workshop we will use the latter option. Select the Rule Node and open the properties panel on the right-hand-side of the screen. Click on _Assignments_ to open the "Validate Data Data I/O" editor. Our rules in this ruleflow-group operate on the _facts_ `Applicant`, `TravelDetails` and `Flight`. Add these _facts_ to the rules session by configuring the following input and output mappings:
 
@@ -78,7 +77,7 @@ Data Input Assignments
 |Flight
 |===
 
-Note that the output-mapping causes the facts to be removed from the rules-session (the name of the property needs to be the same as the name on the input parameter mapping for the fact to be removed). This is important if we want to clean-up our session after the rules have executed. Note that the rules run in the same stateful session as the process, which implies that any facts that we don't remove from the session can be seen by the next rules executed in the context of the process.
+> Note that the output-mapping causes the facts to be removed from the rules-session (the name of the property needs to be the same as the name on the input parameter mapping for the fact to be removed). This is important if we want to clean-up our session after the rules have executed. **Note that the rules run in the same stateful session as the process, which implies that any facts that we don't remove from the session can be seen by the next rules executed in the context of the process**.
 
 [start=6]
 . Now that we've configured the Rule Node, we need to configure the decision logic in the sequence flows that go out of the _Data-based Exclusive_ gateway. The rules will insert a `Rejection` object if the data is not valid. We can check on the presence of that fact in the conditions of our sequence flow going out of the gateway. We can use a Drools conditional expression for this. Select the sequence flow named _rejected_ and open the properties panel. Make sure the _Condition Expression Language_ is set to "Drools". Next, click on the _Expression_ field and enter the following Drools condition:

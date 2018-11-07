@@ -2,4 +2,4 @@
   service:
     name: jboss-as-standalone.service
     state: restarted
-    enabled: yes  
+    enabled: yes

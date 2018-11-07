@@ -2,12 +2,12 @@
   remote_user: vagrant
   become: true
   become_method: sudo
-  become_user: root 
+  become_user: root
   roles:
     - centos
-    - gnome
+ #   - gnome
     - bpmsuite-workshop
   tags:
     - centos
-    - gnome
+ #   - gnome
     - bpmsuite-workshop

@@ -57,25 +57,25 @@ Set the following values to the assignments. Note that some of the assignments a
 |com.jboss.soap.service.acmedemo.FlightRequest
 |requestFlight
 
-|Url
+|Interface
 |String
-|"http://localhost:8080/acme-flight-service-1.0/AcmeDemoInterface?wsdl"
-
-|Mode
-|String
-|"SYNC"
+|AcmeDemoService
 
 |Namespace
 |String
-|"http://service.soap.jboss.com/AcmeDemo/"
+|http://service.soap.jboss.com/AcmeDemo/
 
-|Interface
+|Mode
 |String
-|"AcmeDemoService"
+|SYNC
+
+|Url
+|String
+|http://localhost:8080/acme-flight-service-1.0/AcmeDemoInterface?wsdl
 
 |Operation
 |String
-|"listAvailablePlanes"
+|listAvailablePlanes
 |===
 
 

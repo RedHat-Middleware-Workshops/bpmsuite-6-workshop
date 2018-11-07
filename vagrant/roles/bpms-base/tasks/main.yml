@@ -27,13 +27,15 @@
 
 # This should overlay the BPM download over EAP, intentionally overwriting some files in the process        
 - name: Extract BPM Suite
-  unarchive: 
+  unarchive:
     src: "{{ bpms_artifact_dl_dest }}"
     dest: "{{ eap_library_dest }}"
     creates: /opt/jboss-as/jboss-eap-6.4/bin/kie.policy
     copy: no
     owner: "{{ jboss_user }}"
     group: "{{ jboss_group }}"
+
+- include: patch.yml
 
 - include: java_opts.yml
 

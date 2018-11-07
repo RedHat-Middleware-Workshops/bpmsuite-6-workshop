@@ -12,9 +12,9 @@ In this lab we will create a Human Task Form that allows users to interact with 
 
 == Introduction
 
-BPMN2 allows to define human interaction within an automated process. Human interaction can be required at any point in an automated business process, for example to review the data in the process (is all the process data correct), make a human decison (should this applicant be reviewed by a specialist?), add additional process data (to complete the booking we need additional credit-card information), etc.
+BPMN2 allows to define human interaction within an automated process. Human interaction can be required at any point in an automated business process, for example to review the data in the process (is all the process data correct?), make a human decison (should this applicant be reviewed by a specialist?), add additional process data (to complete the booking we need additional credit-card information), etc.
 
-All these interactions ca be modelled with a human-task node. When the process instance hits such a node, it goes into a wait-state. The process instance will continue once the human-task has been completed.
+All these interactions can be modelled with a human-task node. When the process instance hits such a node, it goes into a **wait-state**. The process instance will continue once the human-task has been completed.
 
 Human-tasks can be assigned to an actor, a list of actors, a group and/or a list of groups.
 
@@ -34,11 +34,11 @@ image:images/lab10-employee-booking-ht-input-output-mapping.png["HT Input Output
 == Implementing the Human Task Form
 
 [start=1]
-. To create the form for our human-task, click on the "Employee Booking" Human Task node, and click on the "Edit Task Form" button:
+. To create the form for our human-task, click on the "Employee Booking" Human Task node, and click on the "**Edit Task Form**" button:
 
 image:images/lab11-human-task-create-form.png["Create Human Task Form.", 256]
 
-This will open a pop-up box in which we need to select the type of editor we want to use. Select "Graphical Modeler":
+This will open a pop-up box in which we need to select the type of editor we want to use. Select "**Graphical Modeler**":
 
 image:images/lab11-select-ht-form-editor.png["Select Human Task Form Editor.", 256]
 
@@ -101,7 +101,7 @@ image:images/lab11-select-ht-form-editor.png["Select Human Task Form Editor.", 2
 |===
 
 [start=3]
-. Now that we've defined the data to be used in our form, we can start creating the form layout. Click on the "Add field by origin" tab, which will open the form editor. First add the _applicant_ data type to the form. Click on _applicant_ on the left-hand-side in the editor and click on the arrow icon. In the "Add all remaining data holder fields to form", click _OK_.
+. Now that we've defined the data to be used in our form, we can start creating the form layout. Click on the "**Add field by origin**" tab, which will open the form editor. First add the _applicant_ data type to the form. Click on _applicant_ on the left-hand-side in the editor and click on the arrow icon. In the "Add all remaining data holder fields to form", click _OK_.
 
 image:images/lab11-ht-form-add-applicant.png["Add Applicant.", 768]
 
