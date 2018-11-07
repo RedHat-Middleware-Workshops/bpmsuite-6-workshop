@@ -5,9 +5,9 @@
   become_user: root
   roles:
     - centos
-    - gnome
+ #   - gnome
     - bpmsuite-workshop
   tags:
     - centos
-    - gnome
+ #   - gnome
     - bpmsuite-workshop

@@ -1,3 +1,5 @@
 .DS_Store
 log-camel-lsp.out
 .vagrant
+jboss-bpmsuite*.zip
+jboss-eap*.zip

@@ -34,7 +34,7 @@
 
 - name: Clone workshop Git repo
   git:
-    repo: "{{ git_workshop_repo_src}}" 
+    repo: "{{ git_workshop_repo_src }}"
     bare: yes
     dest: "{{ git_workshop_repo_dest }}"
   become: yes
@@ -42,5 +42,20 @@
   notify:
     - Restart jboss-as Service
 
-#- name: Deploy SOAP WebServices
-#- name: Deploy DataModel used by WebServices
+- name: Deploy SOAP WebServices
+  copy:
+    owner: "{{ jboss_user }}"
+    group: "{{ jboss_group }}"
+    src: "{{ item }}"
+    dest: "{{ eap_standalone_deployment_dir }}"
+  with_fileglob:
+    - "{{ webservices_war_files }}"
+
+- name: Deploy DataModel used by WebServices
+  copy:
+    owner: "{{ jboss_user }}"
+    group: "{{ jboss_group }}"
+    src: "{{ item }}"
+    dest: "{{ bpms_business_central_location + '/WEB-INF/lib/' }}"
+  with_fileglob:
+    - "{{ datamodel_jar_files }}"

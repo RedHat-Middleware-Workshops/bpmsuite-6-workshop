@@ -4,11 +4,10 @@
 
 eap_home: /opt/jboss-as/jboss-eap-6.4
 
-#bpms_artifact_repo: http://files.justinholmes.co
-bpms_artifact_repo: /packages
+bpms_artifact_repo: /vagrant
 bpms_artifact_name: jboss-bpmsuite-6.4.0.GA-deployable-eap6.x.zip
 
-bpms_patch_artifact_repo: /packages
+bpms_patch_artifact_repo: /vagrant
 bpms_patch_artifact_name: jboss-bpmsuite-6.4.11-patch.zip
 
 bpms_kie_server_location: /opt/jboss-as/jboss-eap-6.4/standalone/deployments/kie-server.war
