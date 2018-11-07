@@ -3,3 +3,4 @@ log-camel-lsp.out
 .vagrant
 jboss-bpmsuite*.zip
 jboss-eap*.zip
+*.box
